@@ -127,10 +127,13 @@
       <FileType>CppControl</FileType>
     </ClInclude>
     <ClInclude Include="LinkList.h" />
-    <ClInclude Include="_Product_.h" />
+    <ClInclude Include="Manage.h">
+      <FileType>CppControl</FileType>
+    </ClInclude>
     <ClInclude Include="Management.h">
       <FileType>CppControl</FileType>
     </ClInclude>
+    <ClInclude Include="_Product_.h" />
     <ClInclude Include="MyCustomUserControl.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
@@ -139,6 +142,7 @@
     <ClCompile Include="Admin.cpp" />
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="Employee.cpp" />
+    <ClCompile Include="Manage.cpp" />
     <ClCompile Include="Management.cpp" />
     <ClCompile Include="MyCustomUserControl.cpp" />
     <ClCompile Include="pch.cpp">
@@ -167,6 +171,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Employee.resx">
       <DependentUpon>Employee.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Manage.resx">
+      <DependentUpon>Manage.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Management.resx">
       <DependentUpon>Management.h</DependentUpon>

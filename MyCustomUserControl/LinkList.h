@@ -54,11 +54,15 @@ public:
 
 	// Function to print the
 	// linked list.
-	void printList(ListView^ listView);
+	void printList(DataGridView^ gridView);
 
 	// Function to delete the
 	// node at given position
 	void deleteNode(int);
+
+	// Fuction to search Node
+	// listview
+	void SearchNode(DataGridView^ gridView, String^ item);
 };
 
 void Linkedlist::deleteNode(int nodeOffset)
@@ -82,7 +86,7 @@ void Linkedlist::deleteNode(int nodeOffset)
 	// deleted is greater than the length
 	// of the linked list.
 	if (check < nodeOffset) {
-		MessageBox::Show(L"Product is out of Range", L"Product", MessageBoxButtons::OK);
+		MessageBox::Show("Product is out of Range", "Product", MessageBoxButtons::OK);
 		return;
 	}
 
@@ -111,7 +115,12 @@ void Linkedlist::deleteNode(int nodeOffset)
 
 	// Change the next pointer
 	// of the previous node.
-	temp2->next = temp1->next;
+	if (temp1->next == nullptr) {
+		temp2->next = nullptr;
+	}
+	else {
+		temp2->next = temp1->next;
+	}
 
 	// Delete the node
 	delete temp1;
@@ -143,134 +152,52 @@ void Linkedlist::insertNode(Product^ prod)
 
 // Function to print the
 // nodes of the linked list.
-void Linkedlist::printList(ListView^ listView)
+void Linkedlist::printList(DataGridView^ gridView)
 {
 	Node^ temp = head;
 
 	// Check for empty list.
 	if (head == nullptr) {
-		MessageBox::Show(L"Product is Empty", L"Product", MessageBoxButtons::OK);
+		MessageBox::Show("Product is Empty", "Product", MessageBoxButtons::OK);
 		return;
 	}
-
+	gridView->Rows->Clear();
 	// Traverse the list.
 	while (temp != nullptr) {
 
-		ListViewItem^ items = gcnew ListViewItem(temp->product->id.ToString());
-		items->SubItems->Add(temp->product->Name);
-		items->SubItems->Add(temp->product->Price.ToString());
-		items->SubItems->Add(temp->product->Quantity.ToString());
-		items->SubItems->Add(temp->product->Type);
-
-		listView->Items->Add(items);
-		delete items;
+		gridView->Rows->Add(temp->product->id.ToString(), temp->product->Name, temp->product->Price.ToString(), temp->product->Quantity.ToString(), temp->product->Type);
 
 		temp = temp->next;
 	}
 }
 
+void Linkedlist::SearchNode(DataGridView^ gridView, String^ item) {
+	Node^ temp = head;
+	bool check = true;
 
+	if (head == nullptr) {
+		MessageBox::Show("Product is Empty", "Product", MessageBoxButtons::OK);
+		return;
+	}
 
+	while (temp != nullptr) {
 
-
-/*public ref class NodeProduct {
-	public:	
-		Product product;
-		NodeProduct^ next;
-		NodeProduct() {
-			this->next = nullptr;
-		}
-};
-
-NodeProduct^ getNode() {
-	NodeProduct^ p = gcnew NodeProduct();
-	return p;
-}
-
-void freeNode(NodeProduct^ p) {
-	delete p;
-}
-
-NodeProduct^ createList(NodeProduct^ plist) {
-	NodeProduct^ p;
-	NodeProduct^ ptr;
-	//Product product;
-	try {
-		String^ conn = "Data Source=DESKTOP-20OQ4HO\\DBSERVER;Initial Catalog=ShopApplication;Integrated Security=True";
-		SqlConnection sqlcon(conn);
-		sqlcon.Open();
-
-		String^ SqlQuery = "Select * from Product";
-		SqlCommand command(SqlQuery, % sqlcon);
-
-		SqlDataReader^ reader = command.ExecuteReader();
-
-		while (reader->Read()) {
-
-			p = getNode();
-
-			if (reader->Read()) {
-				p->product.id = reader->GetInt32(0);
-				p->product.Name = reader->GetString(1);
-				p->product.Price = reader->GetDouble(2);
-				p->product.Quantity = reader->GetInt32(3);
-				p->product.Type = reader->GetString(4);
+		if (temp->product->id.ToString() == item || temp->product->Name == item || temp->product->Type == item) {
+			if (check) {
+				check = false;
+				gridView->Rows->Clear();
 			}
-
-			p->next = nullptr;
+			gridView->Rows->Add(temp->product->id.ToString(), temp->product->Name, temp->product->Price.ToString(), temp->product->Quantity.ToString(), temp->product->Type);
 			
-			if (plist == nullptr) {
-				plist = p;
-				ptr = plist;
-			}
-			else {
-				if (p != nullptr) {
-					ptr->next = p;
-					ptr = p;
-				}
-			}
+		}
 
-		}
+		temp = temp->next;
 	}
-	catch (Exception^ e) {
-		MessageBox::Show(e->Message, "Database Error !", MessageBoxButtons::OK);
+
+	if (check) {
+		MessageBox::Show("Cannot Find Product " + item, "Product", MessageBoxButtons::OK);
 	}
-	for (int i = 0; i < n; i++) {
-		cout << "\n\tEnter Info Number " << i + 1 << " : ";
-		cin >> Item;
-		p = getNode();
-		p->info = Item;
-		p->next = NULL;
-		if (plist == NULL) {
-			plist = p;
-			ptr = plist;
-		}
-		else {
-			ptr->next = p;
-			ptr = p;
-		}
-	}
-return (plist);
+
 }
-
-
-void traverse(NodeProduct^ plist, ListView^ listView) {
-	NodeProduct^ ptr;
-	ptr = plist;
-	int count = 1;
-	while (ptr->next != nullptr) {
-
-		ListViewItem^ items = gcnew ListViewItem(ptr->product.id.ToString());
-		items->SubItems->Add(ptr->product.Name);
-		items->SubItems->Add(ptr->product.Price.ToString());
-		items->SubItems->Add(ptr->product.Quantity.ToString());
-		items->SubItems->Add(ptr->product.Type);
-
-		listView->Items->Add(items);
-		delete items;
-		count++;
-		ptr = ptr->next;
-	}
-}*/
 
 

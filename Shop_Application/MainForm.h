@@ -11,6 +11,7 @@ namespace ShopApplication {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
+
 	/// <summary>
 	/// Summary for MainForm
 	/// </summary>
@@ -20,10 +21,10 @@ namespace ShopApplication {
 		MainForm(User ^user)
 		{
 			InitializeComponent();
+			employee1->BringToFront();
 			//
 			//TODO: Add the constructor code here
 			//
-			employee1->BringToFront();
 			label1->Text = user->Name;
 		}
 
@@ -50,7 +51,8 @@ namespace ShopApplication {
 	private: System::Windows::Forms::Panel^ panel4;
 	private: MyCustomUserControl::Employee^ employee1;
 	private: MyCustomUserControl::Admin^ admin1;
-	private: MyCustomUserControl::Management^ management1;
+	private: MyCustomUserControl::Manage^ manage1;
+
 
 
 
@@ -94,7 +96,7 @@ namespace ShopApplication {
 			this->panel2 = (gcnew System::Windows::Forms::Panel());
 			this->employee1 = (gcnew MyCustomUserControl::Employee());
 			this->admin1 = (gcnew MyCustomUserControl::Admin());
-			this->management1 = (gcnew MyCustomUserControl::Management());
+			this->manage1 = (gcnew MyCustomUserControl::Manage());
 			this->panel1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -205,18 +207,17 @@ namespace ShopApplication {
 			// 
 			// admin1
 			// 
-			this->admin1->Location = System::Drawing::Point(178, 12);
+			this->admin1->Location = System::Drawing::Point(175, 12);
 			this->admin1->Name = L"admin1";
-			this->admin1->Size = System::Drawing::Size(1300, 829);
+			this->admin1->Size = System::Drawing::Size(1303, 829);
 			this->admin1->TabIndex = 3;
 			// 
-			// management1
+			// manage1
 			// 
-			this->management1->BackColor = System::Drawing::Color::WhiteSmoke;
-			this->management1->Location = System::Drawing::Point(175, 10);
-			this->management1->Name = L"management1";
-			this->management1->Size = System::Drawing::Size(1303, 834);
-			this->management1->TabIndex = 4;
+			this->manage1->Location = System::Drawing::Point(175, 12);
+			this->manage1->Name = L"manage1";
+			this->manage1->Size = System::Drawing::Size(1303, 829);
+			this->manage1->TabIndex = 4;
 			// 
 			// MainForm
 			// 
@@ -224,12 +225,12 @@ namespace ShopApplication {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::White;
 			this->ClientSize = System::Drawing::Size(1478, 844);
-			this->Controls->Add(this->management1);
+			this->Controls->Add(this->manage1);
 			this->Controls->Add(this->admin1);
 			this->Controls->Add(this->employee1);
 			this->Controls->Add(this->panel2);
 			this->Controls->Add(this->panel1);
-			this->ForeColor = System::Drawing::Color::Silver;
+			this->ForeColor = System::Drawing::Color::DimGray;
 			this->MaximumSize = System::Drawing::Size(1500, 900);
 			this->Name = L"MainForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
@@ -251,11 +252,11 @@ namespace ShopApplication {
 		this->panel3->Location = this->button1->Location;
 	}
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-		this->admin1->BringToFront();
+		this->admin1->BringToFront();;
 		this->panel3->Location = this->button2->Location;
 	}
 	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
-		this->management1->BringToFront();
+		this->manage1->BringToFront();
 		this->panel3->Location = this->button3->Location;
 	}
 };
