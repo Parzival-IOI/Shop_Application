@@ -21,6 +21,8 @@ namespace MyCustomUserControl {
 		{
 			InitializeComponent();
 
+			this->SortSelection->SelectedIndex = 0;
+
 			loadingData();
 
 			list.printList(dataGridView2);
@@ -61,7 +63,8 @@ namespace MyCustomUserControl {
 
 
 	private: System::Windows::Forms::Button^ Sort;
-	private: System::Windows::Forms::ComboBox^ comboBox1;
+	private: System::Windows::Forms::ComboBox^ SortSelection;
+
 	private: System::Windows::Forms::Panel^ panel3;
 
 
@@ -94,6 +97,11 @@ namespace MyCustomUserControl {
 
 
 
+
+
+
+
+
 	protected:
 
 	private:
@@ -112,6 +120,11 @@ namespace MyCustomUserControl {
 			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			this->dataGridView2 = (gcnew System::Windows::Forms::DataGridView());
+			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->Delete = (gcnew System::Windows::Forms::Button());
 			this->Update = (gcnew System::Windows::Forms::Button());
@@ -130,14 +143,9 @@ namespace MyCustomUserControl {
 			this->textBoxType = (gcnew System::Windows::Forms::TextBox());
 			this->textBoxName = (gcnew System::Windows::Forms::TextBox());
 			this->Sort = (gcnew System::Windows::Forms::Button());
-			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
+			this->SortSelection = (gcnew System::Windows::Forms::ComboBox());
 			this->panel3 = (gcnew System::Windows::Forms::Panel());
 			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->BeginInit();
 			this->panel1->SuspendLayout();
 			this->panel2->SuspendLayout();
@@ -147,6 +155,8 @@ namespace MyCustomUserControl {
 			// 
 			// dataGridView2
 			// 
+			this->dataGridView2->AllowUserToAddRows = false;
+			this->dataGridView2->AllowUserToDeleteRows = false;
 			this->dataGridView2->BackgroundColor = System::Drawing::Color::Gainsboro;
 			dataGridViewCellStyle1->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
 			dataGridViewCellStyle1->BackColor = System::Drawing::Color::WhiteSmoke;
@@ -174,10 +184,55 @@ namespace MyCustomUserControl {
 			this->dataGridView2->Dock = System::Windows::Forms::DockStyle::Bottom;
 			this->dataGridView2->Location = System::Drawing::Point(0, 377);
 			this->dataGridView2->Name = L"dataGridView2";
+			this->dataGridView2->ReadOnly = true;
 			this->dataGridView2->RowHeadersWidth = 62;
 			this->dataGridView2->RowTemplate->Height = 28;
 			this->dataGridView2->Size = System::Drawing::Size(1303, 452);
 			this->dataGridView2->TabIndex = 1;
+			this->dataGridView2->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &Manage::dataGridView2_CellContentClick);
+			this->dataGridView2->CellDoubleClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &Manage::dataGridView2_CellDoubleClick);
+			this->dataGridView2->Click += gcnew System::EventHandler(this, &Manage::dataGridView2_Click);
+			// 
+			// Column1
+			// 
+			this->Column1->AutoSizeMode = System::Windows::Forms::DataGridViewAutoSizeColumnMode::None;
+			this->Column1->HeaderText = L"ID";
+			this->Column1->MinimumWidth = 8;
+			this->Column1->Name = L"Column1";
+			this->Column1->ReadOnly = true;
+			this->Column1->Width = 150;
+			// 
+			// Column2
+			// 
+			this->Column2->AutoSizeMode = System::Windows::Forms::DataGridViewAutoSizeColumnMode::Fill;
+			this->Column2->HeaderText = L"Name";
+			this->Column2->MinimumWidth = 8;
+			this->Column2->Name = L"Column2";
+			this->Column2->ReadOnly = true;
+			// 
+			// Column3
+			// 
+			this->Column3->AutoSizeMode = System::Windows::Forms::DataGridViewAutoSizeColumnMode::Fill;
+			this->Column3->HeaderText = L"Price";
+			this->Column3->MinimumWidth = 8;
+			this->Column3->Name = L"Column3";
+			this->Column3->ReadOnly = true;
+			// 
+			// Column4
+			// 
+			this->Column4->AutoSizeMode = System::Windows::Forms::DataGridViewAutoSizeColumnMode::Fill;
+			this->Column4->HeaderText = L"Quantity";
+			this->Column4->MinimumWidth = 8;
+			this->Column4->Name = L"Column4";
+			this->Column4->ReadOnly = true;
+			// 
+			// Column5
+			// 
+			this->Column5->AutoSizeMode = System::Windows::Forms::DataGridViewAutoSizeColumnMode::Fill;
+			this->Column5->HeaderText = L"Type";
+			this->Column5->MinimumWidth = 8;
+			this->Column5->Name = L"Column5";
+			this->Column5->ReadOnly = true;
 			// 
 			// panel1
 			// 
@@ -200,6 +255,7 @@ namespace MyCustomUserControl {
 			this->Delete->TabIndex = 2;
 			this->Delete->Text = L"Delete";
 			this->Delete->UseVisualStyleBackColor = true;
+			this->Delete->Click += gcnew System::EventHandler(this, &Manage::Delete_Click);
 			// 
 			// Update
 			// 
@@ -210,6 +266,7 @@ namespace MyCustomUserControl {
 			this->Update->TabIndex = 1;
 			this->Update->Text = L"Update";
 			this->Update->UseVisualStyleBackColor = true;
+			this->Update->Click += gcnew System::EventHandler(this, &Manage::Update_Click);
 			// 
 			// Insert
 			// 
@@ -270,9 +327,9 @@ namespace MyCustomUserControl {
 			this->ProductID->Location = System::Drawing::Point(164, 28);
 			this->ProductID->Name = L"ProductID";
 			this->ProductID->Padding = System::Windows::Forms::Padding(2, 3, 2, 3);
-			this->ProductID->Size = System::Drawing::Size(80, 26);
+			this->ProductID->Size = System::Drawing::Size(22, 26);
 			this->ProductID->TabIndex = 11;
-			this->ProductID->Text = L"Unknown";
+			this->ProductID->Text = L"0";
 			// 
 			// label5
 			// 
@@ -364,18 +421,19 @@ namespace MyCustomUserControl {
 			this->Sort->TabIndex = 8;
 			this->Sort->Text = L"Sort";
 			this->Sort->UseVisualStyleBackColor = true;
+			this->Sort->Click += gcnew System::EventHandler(this, &Manage::Sort_Click);
 			// 
-			// comboBox1
+			// SortSelection
 			// 
-			this->comboBox1->Font = (gcnew System::Drawing::Font(L"Consolas", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->SortSelection->Font = (gcnew System::Drawing::Font(L"Consolas", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->comboBox1->ForeColor = System::Drawing::Color::Black;
-			this->comboBox1->FormattingEnabled = true;
-			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"ID", L"Name", L"Type" });
-			this->comboBox1->Location = System::Drawing::Point(697, 339);
-			this->comboBox1->Name = L"comboBox1";
-			this->comboBox1->Size = System::Drawing::Size(149, 30);
-			this->comboBox1->TabIndex = 9;
+			this->SortSelection->ForeColor = System::Drawing::Color::Black;
+			this->SortSelection->FormattingEnabled = true;
+			this->SortSelection->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"ID", L"Name", L"Type" });
+			this->SortSelection->Location = System::Drawing::Point(697, 339);
+			this->SortSelection->Name = L"SortSelection";
+			this->SortSelection->Size = System::Drawing::Size(149, 30);
+			this->SortSelection->TabIndex = 9;
 			// 
 			// panel3
 			// 
@@ -399,46 +457,6 @@ namespace MyCustomUserControl {
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &Manage::button1_Click);
 			// 
-			// Column1
-			// 
-			this->Column1->HeaderText = L"ID";
-			this->Column1->MinimumWidth = 8;
-			this->Column1->Name = L"Column1";
-			this->Column1->ReadOnly = true;
-			this->Column1->Width = 150;
-			// 
-			// Column2
-			// 
-			this->Column2->HeaderText = L"Name";
-			this->Column2->MinimumWidth = 8;
-			this->Column2->Name = L"Column2";
-			this->Column2->ReadOnly = true;
-			this->Column2->Width = 250;
-			// 
-			// Column3
-			// 
-			this->Column3->HeaderText = L"Price";
-			this->Column3->MinimumWidth = 8;
-			this->Column3->Name = L"Column3";
-			this->Column3->ReadOnly = true;
-			this->Column3->Width = 125;
-			// 
-			// Column4
-			// 
-			this->Column4->HeaderText = L"Quantity";
-			this->Column4->MinimumWidth = 8;
-			this->Column4->Name = L"Column4";
-			this->Column4->ReadOnly = true;
-			this->Column4->Width = 125;
-			// 
-			// Column5
-			// 
-			this->Column5->HeaderText = L"Type";
-			this->Column5->MinimumWidth = 8;
-			this->Column5->Name = L"Column5";
-			this->Column5->ReadOnly = true;
-			this->Column5->Width = 200;
-			// 
 			// Manage
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
@@ -446,7 +464,7 @@ namespace MyCustomUserControl {
 			this->BackColor = System::Drawing::Color::WhiteSmoke;
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->panel3);
-			this->Controls->Add(this->comboBox1);
+			this->Controls->Add(this->SortSelection);
 			this->Controls->Add(this->Sort);
 			this->Controls->Add(this->panel2);
 			this->Controls->Add(this->seachProduct);
@@ -582,11 +600,143 @@ namespace MyCustomUserControl {
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		list.printList(dataGridView2);
-		this->ProductID->Text = "Unknown";
+		this->ProductID->Text = "0";
 		this->textBoxName->Text = "";
-		this->textBoxType->Name = "";
+		this->textBoxType->Text = "";
 		this->NumberPrice->Value = 0;
 		this->NumberQuantity->Value = 0;
+	}
+	private: System::Void dataGridView2_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void dataGridView2_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+		/*if (e->RowIndex >= 0) {
+			int index = e->RowIndex;// get the Row Index             
+			DataGridViewRow^ selectedRow = dataGridView2->Rows[index];
+			ProductID->Text = selectedRow->Cells[0]->Value->ToString();
+
+			//->Cells[0].Value.ToString();
+			//textBox1.Text = selectedRow->Cells[0].Value.ToString();
+		}*/
+	}
+	private: System::Void dataGridView2_CellDoubleClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+		if (e->RowIndex >= 0) {
+			int index = e->RowIndex;// get the Row Index             
+			DataGridViewRow^ selectedRow = dataGridView2->Rows[index];
+			ProductID->Text = selectedRow->Cells[0]->Value->ToString();
+			textBoxName->Text = selectedRow->Cells[1]->Value->ToString();
+
+			NumberPrice->Value = System::Convert::ToDecimal(selectedRow->Cells[2]->Value->ToString());
+			NumberQuantity->Value = System::Convert::ToInt32(selectedRow->Cells[3]->Value->ToString());
+
+			textBoxType->Text = selectedRow->Cells[4]->Value->ToString();
+		}
+	}
+	private: System::Void Update_Click(System::Object^ sender, System::EventArgs^ e) {
+		Product^ prod = gcnew Product();
+		prod->id = System::Convert::ToInt32(ProductID->Text);
+		prod->Name = this->textBoxName->Text;
+		prod->Price = System::Convert::ToDouble(this->NumberPrice->Value);
+		prod->Quantity = System::Convert::ToInt32(this->NumberQuantity->Value);
+		prod->Type = this->textBoxType->Text;
+
+		if (prod->Name == "" || prod->Price == 0 || prod->Quantity == 0 || prod->Type == "") {
+			MessageBox::Show("Empty Field, Please Fill The Complete Form", "Product", MessageBoxButtons::OK);
+		}
+		else if (prod->id == 0) {
+			MessageBox::Show("Failed To Get ID", "Product", MessageBoxButtons::OK);
+		}
+		else {
+			try {
+				String^ conn = "Data Source=DESKTOP-20OQ4HO\\DBSERVER;Initial Catalog=ShopApplication;Integrated Security=True";
+				SqlConnection sqlcon(conn);
+				sqlcon.Open();
+
+				String^ SqlQuery = "UPDATE Product " + "SET Product_Name = @Name, Product_Price = @Price, Product_Quantity = @Quantity, Product_Type = @Type " + "WHERE Id = @id";
+
+				SqlCommand command(SqlQuery, % sqlcon);
+				command.Parameters->AddWithValue("@Name", prod->Name);
+				command.Parameters->AddWithValue("@Price", prod->Price);
+				command.Parameters->AddWithValue("@Quantity", prod->Quantity);
+				command.Parameters->AddWithValue("@Type", prod->Type);
+
+				command.Parameters->AddWithValue("@id", prod->id);
+
+				command.ExecuteNonQuery();
+
+				list.UpdateNode(prod);
+				list.printList(dataGridView2);
+
+				this->ProductID->Text = "0";
+				this->textBoxName->Text = "";
+				this->textBoxType->Text = "";
+				this->NumberPrice->Value = 0;
+				this->NumberQuantity->Value = 0;
+
+			}
+			catch (Exception^ e) {
+				MessageBox::Show(e->Message, "Database Error !", MessageBoxButtons::OK);
+			}
+		}
+
+	}
+	private: System::Void Delete_Click(System::Object^ sender, System::EventArgs^ e) {
+		Product^ prod = gcnew Product();
+		prod->id = System::Convert::ToInt32(ProductID->Text);
+		prod->Name = this->textBoxName->Text;
+		prod->Price = System::Convert::ToDouble(this->NumberPrice->Value);
+		prod->Quantity = System::Convert::ToInt32(this->NumberQuantity->Value);
+		prod->Type = this->textBoxType->Text;
+
+		if (prod->Name == "" || prod->Price == 0 || prod->Quantity == 0 || prod->Type == "") {
+			MessageBox::Show("Empty Field, Please Fill The Complete Form", "Product", MessageBoxButtons::OK);
+		}
+		else if (prod->id == 0) {
+			MessageBox::Show("Failed To Get ID", "Product", MessageBoxButtons::OK);
+		}
+		else {
+			try {
+				String^ conn = "Data Source=DESKTOP-20OQ4HO\\DBSERVER;Initial Catalog=ShopApplication;Integrated Security=True";
+				SqlConnection sqlcon(conn);
+				sqlcon.Open();
+
+				String^ SqlQuery = "DELETE FROM Product " + "WHERE Id = @id AND Product_Name = @Name";
+
+				SqlCommand command(SqlQuery, % sqlcon);
+				command.Parameters->AddWithValue("@id", prod->id);
+				command.Parameters->AddWithValue("@Name", prod->Name);
+
+				command.ExecuteNonQuery();
+
+				list.deleteNode(prod);
+				list.printList(dataGridView2);
+
+				this->ProductID->Text = "0";
+				this->textBoxName->Text = "";
+				this->textBoxType->Text = "";
+				this->NumberPrice->Value = 0;
+				this->NumberQuantity->Value = 0;
+
+			}
+			catch (Exception^ e) {
+				MessageBox::Show(e->Message, "Database Error !", MessageBoxButtons::OK);
+			}
+		}
+	}
+	private: System::Void Sort_Click(System::Object^ sender, System::EventArgs^ e) {
+		String^ item =  this->SortSelection->SelectedItem->ToString();
+		if (item == "ID") {
+			list.SortNode(1);
+		}
+		else if (item == "Name") {
+			list.SortNode(2);
+		}
+		else if (item == "Type") {
+			list.SortNode(3);
+		}
+		else {
+			MessageBox::Show("Can't Get Value From Combobox", "Database Error !", MessageBoxButtons::OK);
+		}
+		list.printList(dataGridView2);
 	}
 };
 }

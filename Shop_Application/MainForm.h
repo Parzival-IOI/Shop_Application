@@ -124,7 +124,7 @@ namespace ShopApplication {
 			// 
 			// panel3
 			// 
-			this->panel3->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->panel3->Anchor = System::Windows::Forms::AnchorStyles::Top;
 			this->panel3->BackColor = System::Drawing::Color::Crimson;
 			this->panel3->Location = System::Drawing::Point(0, 90);
 			this->panel3->Name = L"panel3";
@@ -214,6 +214,7 @@ namespace ShopApplication {
 			// 
 			// manage1
 			// 
+			this->manage1->BackColor = System::Drawing::Color::WhiteSmoke;
 			this->manage1->Location = System::Drawing::Point(175, 12);
 			this->manage1->Name = L"manage1";
 			this->manage1->Size = System::Drawing::Size(1303, 829);

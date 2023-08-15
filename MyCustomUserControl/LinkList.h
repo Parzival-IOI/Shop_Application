@@ -58,17 +58,25 @@ public:
 
 	// Function to delete the
 	// node at given position
-	void deleteNode(int);
+	void deleteNode(Product^ prod);
 
 	// Fuction to search Node
-	// listview
+	// Parameter(data-grid-view, String^ Item)
 	void SearchNode(DataGridView^ gridView, String^ item);
+
+	// Function Update Node
+	// Parameter(data-grid-view, Product^ item_Update)
+	void UpdateNode(Product^ prod);
+
+	//Function Sort Node
+	// Parameter Option( 1 = ID | 2 = Name | 3 = Type )
+	void SortNode(int option);
 };
 
-void Linkedlist::deleteNode(int nodeOffset)
+void Linkedlist::deleteNode(Product^ prod)
 {
 	Node^ temp1 = head;
-	Node^ temp2 = nullptr;
+	Node^ temp2;
 	int check = 0;
 
 	if (head == nullptr) {
@@ -76,54 +84,46 @@ void Linkedlist::deleteNode(int nodeOffset)
 		return;
 	}
 
-	// Find length of the linked-list.
-	while (temp1 != nullptr) {
-		temp1 = temp1->next;
-		check++;
-	}
-
-	// Check if the position to be
-	// deleted is greater than the length
-	// of the linked list.
-	if (check < nodeOffset) {
-		MessageBox::Show("Product is out of Range", "Product", MessageBoxButtons::OK);
-		return;
-	}
-
 	// Declare temp1
 	temp1 = head;
 
 	// Deleting the head.
-	if (nodeOffset == 1) {
+	if (temp1->product->id == prod->id && temp1->product->Name == prod->Name) {
 
+		MessageBox::Show("Product Deleted At " + temp1->product->id, "Product", MessageBoxButtons::OK);
 		// Update head
 		head = head->next;
 		delete temp1;
 		return;
 	}
 
-	// Traverse the list to
-	// find the node to be deleted.
-	while (nodeOffset-- > 1) {
+	while (temp1 != nullptr) {
 
-		// Update temp2
+		if (temp1->product->id == prod->id && temp1->product->Name == prod->Name) {
+			if (temp1->next == nullptr) {
+				temp2->next = nullptr;
+			}
+			else {
+				temp2->next = temp1->next;
+			}
+			check++;
+
+			MessageBox::Show("Product Deleted At " + temp1->product->id, "Product", MessageBoxButtons::OK);
+
+			delete temp1;
+			break;
+		}
+
 		temp2 = temp1;
 
-		// Update temp1
 		temp1 = temp1->next;
 	}
 
-	// Change the next pointer
-	// of the previous node.
-	if (temp1->next == nullptr) {
-		temp2->next = nullptr;
-	}
-	else {
-		temp2->next = temp1->next;
+	if(check == 0){
+		MessageBox::Show("Can't Find Product ID " + prod->id, "Product", MessageBoxButtons::OK);
 	}
 
-	// Delete the node
-	delete temp1;
+
 }
 
 // Function to insert a new node.
@@ -200,4 +200,105 @@ void Linkedlist::SearchNode(DataGridView^ gridView, String^ item) {
 
 }
 
+void Linkedlist::UpdateNode(Product^ prod) {
+	Node^ current = head;
+	int check = 0;
+
+	if (head == nullptr) {
+		MessageBox::Show("Product is Empty", "Product", MessageBoxButtons::OK);
+		return;
+	}
+
+	while (current->next != nullptr) {
+		if (current->product->id == prod->id) {
+			current->product = prod;
+
+			MessageBox::Show("Updated Product With Product ID = " + prod->id, "Product", MessageBoxButtons::OK);
+
+			return;
+		}
+
+		current = current->next;
+		check++;
+	}
+	if (check == 0) {
+		MessageBox::Show("Cannot Find Product ID " + prod->id, "Product", MessageBoxButtons::OK);
+	}
+
+}
+
+
+void Linkedlist::SortNode(int option) {
+	Node^ current = head;
+	Node^ index = nullptr;
+	Product^ temp;
+
+	if (option == 1) {
+
+		if (head == nullptr) {
+			MessageBox::Show("Product is Empty", "Product", MessageBoxButtons::OK);
+			return;
+		}
+		else {
+			while (current != nullptr) {
+				index = current->next;
+				while (index != nullptr) {
+					if (current->product->id > index->product->id) {
+						temp = current->product;
+						current->product = index->product;
+						index->product = temp;
+					}
+					index = index->next;
+				}
+				current = current->next;
+			}
+			MessageBox::Show("Completed Sorting List By ID", "Product", MessageBoxButtons::OK);
+		}
+
+	}
+	else if (option == 2) {
+
+		if (head == nullptr) {
+			MessageBox::Show("Product is Empty", "Product", MessageBoxButtons::OK);
+			return;
+		}
+		else {
+			while (current != nullptr) {
+				index = current->next;
+				while (index != nullptr) {
+					if (current->product->id < index->product->id) {
+						temp = current->product;
+						current->product = index->product;
+						index->product = temp;
+					}
+					index = index->next;
+				}
+				current = current->next;
+			}
+			MessageBox::Show("Completed Sorting List By ID", "Product", MessageBoxButtons::OK);
+		}
+	}
+	else if (option == 3) {
+
+		if (head == nullptr) {
+			MessageBox::Show("Product is Empty", "Product", MessageBoxButtons::OK);
+			return;
+		}
+		else {
+			while (current != nullptr) {
+				index = current->next;
+				while (index != nullptr) {
+					if (current->product->id > index->product->id) {
+						temp = current->product;
+						current->product = index->product;
+						index->product = temp;
+					}
+					index = index->next;
+				}
+				current = current->next;
+			}
+			MessageBox::Show("Completed Sorting List By ID", "Product", MessageBoxButtons::OK);
+		}
+	}
+}
 
