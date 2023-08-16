@@ -1,5 +1,5 @@
 #pragma once
-#include "LinkList.h"
+#include "LinkedList_Product.h"
 using namespace System;
 using namespace System::ComponentModel;
 using namespace System::Collections;
@@ -23,7 +23,7 @@ namespace MyCustomUserControl {
 
 			this->SortSelection->SelectedIndex = 0;
 
-			loadingData();
+			loadingData_Product();
 
 			list.printList(dataGridView2);
 			//
@@ -48,18 +48,18 @@ namespace MyCustomUserControl {
 
 
 
-	private: System::Windows::Forms::Panel^ panel1;
-	private: System::Windows::Forms::Button^ Update;
 
-	private: System::Windows::Forms::Button^ Insert;
+
+
+
 	private: System::Windows::Forms::TextBox^ searchTextBox;
 
 
 	private: System::Windows::Forms::Button^ seachProduct;
-	public: Linkedlist list;
+	public: Linkedlist_Product list;
 	private: Product^ product;
 	private: System::Windows::Forms::Panel^ panel2;
-	private: System::Windows::Forms::Button^ Delete;
+
 
 
 	private: System::Windows::Forms::Button^ Sort;
@@ -92,6 +92,10 @@ namespace MyCustomUserControl {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column3;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column4;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
+	private: System::Windows::Forms::Button^ Insert;
+	private: System::Windows::Forms::Button^ Update;
+	private: System::Windows::Forms::Button^ Delete;
+	private: System::Windows::Forms::Panel^ panel1;
 
 
 
@@ -117,18 +121,14 @@ namespace MyCustomUserControl {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle11 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle12 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			this->dataGridView2 = (gcnew System::Windows::Forms::DataGridView());
 			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->panel1 = (gcnew System::Windows::Forms::Panel());
-			this->Delete = (gcnew System::Windows::Forms::Button());
-			this->Update = (gcnew System::Windows::Forms::Button());
-			this->Insert = (gcnew System::Windows::Forms::Button());
 			this->searchTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->seachProduct = (gcnew System::Windows::Forms::Button());
 			this->panel2 = (gcnew System::Windows::Forms::Panel());
@@ -146,11 +146,15 @@ namespace MyCustomUserControl {
 			this->SortSelection = (gcnew System::Windows::Forms::ComboBox());
 			this->panel3 = (gcnew System::Windows::Forms::Panel());
 			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->Insert = (gcnew System::Windows::Forms::Button());
+			this->Update = (gcnew System::Windows::Forms::Button());
+			this->Delete = (gcnew System::Windows::Forms::Button());
+			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->BeginInit();
-			this->panel1->SuspendLayout();
 			this->panel2->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NumberPrice))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NumberQuantity))->BeginInit();
+			this->panel1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// dataGridView2
@@ -158,36 +162,36 @@ namespace MyCustomUserControl {
 			this->dataGridView2->AllowUserToAddRows = false;
 			this->dataGridView2->AllowUserToDeleteRows = false;
 			this->dataGridView2->BackgroundColor = System::Drawing::Color::Gainsboro;
-			dataGridViewCellStyle1->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			dataGridViewCellStyle1->BackColor = System::Drawing::Color::WhiteSmoke;
-			dataGridViewCellStyle1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle11->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			dataGridViewCellStyle11->BackColor = System::Drawing::Color::WhiteSmoke;
+			dataGridViewCellStyle11->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			dataGridViewCellStyle1->ForeColor = System::Drawing::SystemColors::WindowText;
-			dataGridViewCellStyle1->SelectionBackColor = System::Drawing::SystemColors::Highlight;
-			dataGridViewCellStyle1->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
-			dataGridViewCellStyle1->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
-			this->dataGridView2->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle11->ForeColor = System::Drawing::SystemColors::WindowText;
+			dataGridViewCellStyle11->SelectionBackColor = System::Drawing::SystemColors::Highlight;
+			dataGridViewCellStyle11->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
+			dataGridViewCellStyle11->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			this->dataGridView2->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
 			this->dataGridView2->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridView2->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(5) {
 				this->Column1,
 					this->Column2, this->Column3, this->Column4, this->Column5
 			});
-			dataGridViewCellStyle2->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			dataGridViewCellStyle2->BackColor = System::Drawing::Color::WhiteSmoke;
-			dataGridViewCellStyle2->Font = (gcnew System::Drawing::Font(L"Consolas", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle12->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			dataGridViewCellStyle12->BackColor = System::Drawing::Color::WhiteSmoke;
+			dataGridViewCellStyle12->Font = (gcnew System::Drawing::Font(L"Consolas", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			dataGridViewCellStyle2->ForeColor = System::Drawing::Color::Black;
-			dataGridViewCellStyle2->SelectionBackColor = System::Drawing::Color::Gray;
-			dataGridViewCellStyle2->SelectionForeColor = System::Drawing::Color::White;
-			dataGridViewCellStyle2->WrapMode = System::Windows::Forms::DataGridViewTriState::False;
-			this->dataGridView2->DefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle12->ForeColor = System::Drawing::Color::Black;
+			dataGridViewCellStyle12->SelectionBackColor = System::Drawing::Color::Gray;
+			dataGridViewCellStyle12->SelectionForeColor = System::Drawing::Color::White;
+			dataGridViewCellStyle12->WrapMode = System::Windows::Forms::DataGridViewTriState::False;
+			this->dataGridView2->DefaultCellStyle = dataGridViewCellStyle12;
 			this->dataGridView2->Dock = System::Windows::Forms::DockStyle::Bottom;
-			this->dataGridView2->Location = System::Drawing::Point(0, 377);
+			this->dataGridView2->Location = System::Drawing::Point(0, 379);
 			this->dataGridView2->Name = L"dataGridView2";
 			this->dataGridView2->ReadOnly = true;
 			this->dataGridView2->RowHeadersWidth = 62;
 			this->dataGridView2->RowTemplate->Height = 28;
-			this->dataGridView2->Size = System::Drawing::Size(1303, 452);
+			this->dataGridView2->Size = System::Drawing::Size(1303, 450);
 			this->dataGridView2->TabIndex = 1;
 			this->dataGridView2->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &Manage::dataGridView2_CellContentClick);
 			this->dataGridView2->CellDoubleClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &Manage::dataGridView2_CellDoubleClick);
@@ -234,51 +238,6 @@ namespace MyCustomUserControl {
 			this->Column5->Name = L"Column5";
 			this->Column5->ReadOnly = true;
 			// 
-			// panel1
-			// 
-			this->panel1->Controls->Add(this->Delete);
-			this->panel1->Controls->Add(this->Update);
-			this->panel1->Controls->Add(this->Insert);
-			this->panel1->Dock = System::Windows::Forms::DockStyle::Right;
-			this->panel1->ForeColor = System::Drawing::Color::Black;
-			this->panel1->Location = System::Drawing::Point(1002, 0);
-			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(301, 377);
-			this->panel1->TabIndex = 3;
-			// 
-			// Delete
-			// 
-			this->Delete->ForeColor = System::Drawing::Color::Black;
-			this->Delete->Location = System::Drawing::Point(63, 272);
-			this->Delete->Name = L"Delete";
-			this->Delete->Size = System::Drawing::Size(163, 56);
-			this->Delete->TabIndex = 2;
-			this->Delete->Text = L"Delete";
-			this->Delete->UseVisualStyleBackColor = true;
-			this->Delete->Click += gcnew System::EventHandler(this, &Manage::Delete_Click);
-			// 
-			// Update
-			// 
-			this->Update->ForeColor = System::Drawing::Color::Black;
-			this->Update->Location = System::Drawing::Point(63, 148);
-			this->Update->Name = L"Update";
-			this->Update->Size = System::Drawing::Size(163, 56);
-			this->Update->TabIndex = 1;
-			this->Update->Text = L"Update";
-			this->Update->UseVisualStyleBackColor = true;
-			this->Update->Click += gcnew System::EventHandler(this, &Manage::Update_Click);
-			// 
-			// Insert
-			// 
-			this->Insert->ForeColor = System::Drawing::Color::Black;
-			this->Insert->Location = System::Drawing::Point(63, 42);
-			this->Insert->Name = L"Insert";
-			this->Insert->Size = System::Drawing::Size(163, 49);
-			this->Insert->TabIndex = 0;
-			this->Insert->Text = L"Insert";
-			this->Insert->UseVisualStyleBackColor = true;
-			this->Insert->Click += gcnew System::EventHandler(this, &Manage::Insert_Click);
-			// 
 			// searchTextBox
 			// 
 			this->searchTextBox->Font = (gcnew System::Drawing::Font(L"Consolas", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
@@ -317,7 +276,7 @@ namespace MyCustomUserControl {
 			this->panel2->Controls->Add(this->textBoxName);
 			this->panel2->Location = System::Drawing::Point(14, 14);
 			this->panel2->Name = L"panel2";
-			this->panel2->Size = System::Drawing::Size(931, 303);
+			this->panel2->Size = System::Drawing::Size(930, 300);
 			this->panel2->TabIndex = 7;
 			// 
 			// ProductID
@@ -415,9 +374,9 @@ namespace MyCustomUserControl {
 			this->Sort->Font = (gcnew System::Drawing::Font(L"Consolas", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->Sort->ForeColor = System::Drawing::Color::Black;
-			this->Sort->Location = System::Drawing::Point(858, 339);
+			this->Sort->Location = System::Drawing::Point(860, 340);
 			this->Sort->Name = L"Sort";
-			this->Sort->Size = System::Drawing::Size(87, 35);
+			this->Sort->Size = System::Drawing::Size(90, 35);
 			this->Sort->TabIndex = 8;
 			this->Sort->Text = L"Sort";
 			this->Sort->UseVisualStyleBackColor = true;
@@ -430,9 +389,9 @@ namespace MyCustomUserControl {
 			this->SortSelection->ForeColor = System::Drawing::Color::Black;
 			this->SortSelection->FormattingEnabled = true;
 			this->SortSelection->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"ID", L"Name", L"Type" });
-			this->SortSelection->Location = System::Drawing::Point(697, 339);
+			this->SortSelection->Location = System::Drawing::Point(700, 340);
 			this->SortSelection->Name = L"SortSelection";
-			this->SortSelection->Size = System::Drawing::Size(149, 30);
+			this->SortSelection->Size = System::Drawing::Size(150, 30);
 			this->SortSelection->TabIndex = 9;
 			// 
 			// panel3
@@ -441,7 +400,7 @@ namespace MyCustomUserControl {
 			this->panel3->Dock = System::Windows::Forms::DockStyle::Right;
 			this->panel3->Location = System::Drawing::Point(992, 0);
 			this->panel3->Name = L"panel3";
-			this->panel3->Size = System::Drawing::Size(10, 377);
+			this->panel3->Size = System::Drawing::Size(10, 379);
 			this->panel3->TabIndex = 10;
 			// 
 			// button1
@@ -456,6 +415,51 @@ namespace MyCustomUserControl {
 			this->button1->Text = L"Refresh";
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &Manage::button1_Click);
+			// 
+			// Insert
+			// 
+			this->Insert->ForeColor = System::Drawing::Color::Black;
+			this->Insert->Location = System::Drawing::Point(60, 50);
+			this->Insert->Name = L"Insert";
+			this->Insert->Size = System::Drawing::Size(160, 50);
+			this->Insert->TabIndex = 0;
+			this->Insert->Text = L"Insert";
+			this->Insert->UseVisualStyleBackColor = true;
+			this->Insert->Click += gcnew System::EventHandler(this, &Manage::Insert_Click);
+			// 
+			// Update
+			// 
+			this->Update->ForeColor = System::Drawing::Color::Black;
+			this->Update->Location = System::Drawing::Point(60, 150);
+			this->Update->Name = L"Update";
+			this->Update->Size = System::Drawing::Size(160, 50);
+			this->Update->TabIndex = 1;
+			this->Update->Text = L"Update";
+			this->Update->UseVisualStyleBackColor = true;
+			this->Update->Click += gcnew System::EventHandler(this, &Manage::Update_Click);
+			// 
+			// Delete
+			// 
+			this->Delete->ForeColor = System::Drawing::Color::Black;
+			this->Delete->Location = System::Drawing::Point(60, 250);
+			this->Delete->Name = L"Delete";
+			this->Delete->Size = System::Drawing::Size(160, 50);
+			this->Delete->TabIndex = 2;
+			this->Delete->Text = L"Delete";
+			this->Delete->UseVisualStyleBackColor = true;
+			this->Delete->Click += gcnew System::EventHandler(this, &Manage::Delete_Click);
+			// 
+			// panel1
+			// 
+			this->panel1->Controls->Add(this->Delete);
+			this->panel1->Controls->Add(this->Update);
+			this->panel1->Controls->Add(this->Insert);
+			this->panel1->Dock = System::Windows::Forms::DockStyle::Right;
+			this->panel1->ForeColor = System::Drawing::Color::Black;
+			this->panel1->Location = System::Drawing::Point(1002, 0);
+			this->panel1->Name = L"panel1";
+			this->panel1->Size = System::Drawing::Size(301, 379);
+			this->panel1->TabIndex = 3;
 			// 
 			// Manage
 			// 
@@ -475,16 +479,16 @@ namespace MyCustomUserControl {
 			this->Size = System::Drawing::Size(1303, 829);
 			this->Load += gcnew System::EventHandler(this, &Manage::Manage_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->EndInit();
-			this->panel1->ResumeLayout(false);
 			this->panel2->ResumeLayout(false);
 			this->panel2->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NumberPrice))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NumberQuantity))->EndInit();
+			this->panel1->ResumeLayout(false);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
-		void loadingData() {
+		void loadingData_Product() {
 			try {
 				String^ conn = "Data Source=DESKTOP-20OQ4HO\\DBSERVER;Initial Catalog=ShopApplication;Integrated Security=True";
 				SqlConnection sqlcon(conn);
@@ -508,7 +512,7 @@ namespace MyCustomUserControl {
 					product->Quantity = reader->GetInt32(3);
 					product->Type = reader->GetString(4);
 
-					this->list.insertNode(product);
+					this->list.insertNode_Product(product);
 
 
 					/*ListViewItem^ items = gcnew ListViewItem(product->id.ToString());
@@ -531,7 +535,7 @@ namespace MyCustomUserControl {
 	}
 	private: System::Void seachProduct_Click(System::Object^ sender, System::EventArgs^ e) {
 		String^ item = this->searchTextBox->Text;
-		list.SearchNode(dataGridView2, item);
+		list.SearchNode_Product(dataGridView2, item);
 		this->searchTextBox->Text = "";
 	}
 	private: System::Void Insert_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -578,7 +582,7 @@ namespace MyCustomUserControl {
 						prod->id = reader->GetInt32(0);
 					}
 					
-					list.insertNode(prod);
+					list.insertNode_Product(prod);
 					list.printList(dataGridView2);
 
 					this->textBoxName->Text = "";
@@ -663,7 +667,7 @@ namespace MyCustomUserControl {
 
 				command.ExecuteNonQuery();
 
-				list.UpdateNode(prod);
+				list.UpdateNode_Product(prod);
 				list.printList(dataGridView2);
 
 				this->ProductID->Text = "0";
@@ -707,7 +711,7 @@ namespace MyCustomUserControl {
 
 				command.ExecuteNonQuery();
 
-				list.deleteNode(prod);
+				list.deleteNode_Product(prod);
 				list.printList(dataGridView2);
 
 				this->ProductID->Text = "0";
@@ -725,13 +729,13 @@ namespace MyCustomUserControl {
 	private: System::Void Sort_Click(System::Object^ sender, System::EventArgs^ e) {
 		String^ item =  this->SortSelection->SelectedItem->ToString();
 		if (item == "ID") {
-			list.SortNode(1);
+			list.SortNode_Product(1);
 		}
 		else if (item == "Name") {
-			list.SortNode(2);
+			list.SortNode_Product(2);
 		}
 		else if (item == "Type") {
-			list.SortNode(3);
+			list.SortNode_Product(3);
 		}
 		else {
 			MessageBox::Show("Can't Get Value From Combobox", "Database Error !", MessageBoxButtons::OK);

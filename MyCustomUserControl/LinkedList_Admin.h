@@ -8,49 +8,53 @@ using namespace System::Data;
 using namespace System::Drawing;
 using namespace System::Data::SqlClient;
 
-public ref class Product {
+public ref class Employee {
 	public:
 		int id;
 		String^ Name;
-		double Price;
-		int Quantity;
-		String^ Type;
-		
+		String^ Sex;
+		DateTime DateOfBirth;
+		String^ Phone;
+		String^ Password;
+		DateTime RegisterDate;
+		String^ Position;
+		String^ WorkHour;
+		String^ Salary;
 };
 
 public ref class Node {
 public:
-	Product^ product;
+	Employee^ employee;
 	Node^ next;
 
 	// Default constructor
 	Node()
 	{
-		product = nullptr;
+		employee = nullptr;
 		next = nullptr;
 	}
 
 	// Parameterised Constructor
-	Node(Product^ product)
+	Node(Employee^ emp)
 	{
-		this->product = product;
+		this->employee = emp;
 		this->next = nullptr;
 	}
 };
 
 // Linked list class to
 // implement a linked list.
-public ref class Linkedlist {
+public ref class Linkedlist_Admin {
 	Node^ head;
 
 public:
 	// Default constructor
-	Linkedlist() { head = nullptr; }
+	Linkedlist_Admin() { head = nullptr; }
 
 	// Function to insert a
 	// node at the end of the
 	// linked list.
-	void insertNode(Product^ prod);
+	void insertNode(Employee^ emp);
 
 	// Function to print the
 	// linked list.
@@ -58,22 +62,22 @@ public:
 
 	// Function to delete the
 	// node at given position
-	void deleteNode(Product^ prod);
+	void deleteNode(Employee^ emp);
 
 	// Fuction to search Node
 	// Parameter(data-grid-view, String^ Item)
-	void SearchNode(DataGridView^ gridView, String^ item);
+	//void SearchNode(DataGridView^ gridView, String^ item);
 
 	// Function Update Node
 	// Parameter(data-grid-view, Product^ item_Update)
-	void UpdateNode(Product^ prod);
+	//void UpdateNode(Employee^ emp);
 
 	//Function Sort Node
 	// Parameter Option( 1 = ID | 2 = Name | 3 = Type )
-	void SortNode(int option);
+	//void SortNode(int option);
 };
 
-void Linkedlist::deleteNode(Product^ prod)
+void Linkedlist_Admin::deleteNode(Employee^ emp)
 {
 	Node^ temp1 = head;
 	Node^ temp2;
@@ -88,9 +92,9 @@ void Linkedlist::deleteNode(Product^ prod)
 	temp1 = head;
 
 	// Deleting the head.
-	if (temp1->product->id == prod->id && temp1->product->Name == prod->Name) {
+	if (temp1->employee->id == emp->id) {
 
-		MessageBox::Show("Product Deleted At " + temp1->product->id, "Product", MessageBoxButtons::OK);
+		MessageBox::Show("Product Deleted At " + temp1->employee->id, "Product", MessageBoxButtons::OK);
 		// Update head
 		head = head->next;
 		delete temp1;
@@ -99,7 +103,7 @@ void Linkedlist::deleteNode(Product^ prod)
 
 	while (temp1 != nullptr) {
 
-		if (temp1->product->id == prod->id && temp1->product->Name == prod->Name) {
+		if (temp1->employee->id == emp->id) {
 			if (temp1->next == nullptr) {
 				temp2->next = nullptr;
 			}
@@ -108,7 +112,7 @@ void Linkedlist::deleteNode(Product^ prod)
 			}
 			check++;
 
-			MessageBox::Show("Product Deleted At " + temp1->product->id, "Product", MessageBoxButtons::OK);
+			MessageBox::Show("Product Deleted At " + temp1->employee->id, "Product", MessageBoxButtons::OK);
 
 			delete temp1;
 			break;
@@ -119,18 +123,18 @@ void Linkedlist::deleteNode(Product^ prod)
 		temp1 = temp1->next;
 	}
 
-	if(check == 0){
-		MessageBox::Show("Can't Find Product ID " + prod->id, "Product", MessageBoxButtons::OK);
+	if (check == 0) {
+		MessageBox::Show("Can't Find Product ID " + emp->id, "Product", MessageBoxButtons::OK);
 	}
 
 
 }
 
 // Function to insert a new node.
-void Linkedlist::insertNode(Product^ prod)
+void Linkedlist_Admin::insertNode(Employee^ emp)
 {
 	// Create the new Node.
-	Node^ newNode = gcnew Node(prod);
+	Node^ newNode = gcnew Node(emp);
 
 	// Assign to head
 	if (head == nullptr) {
@@ -152,7 +156,7 @@ void Linkedlist::insertNode(Product^ prod)
 
 // Function to print the
 // nodes of the linked list.
-void Linkedlist::printList(DataGridView^ gridView)
+void Linkedlist_Admin::printList(DataGridView^ gridView)
 {
 	Node^ temp = head;
 
@@ -165,13 +169,13 @@ void Linkedlist::printList(DataGridView^ gridView)
 	// Traverse the list.
 	while (temp != nullptr) {
 
-		gridView->Rows->Add(temp->product->id.ToString(), temp->product->Name, temp->product->Price.ToString(), temp->product->Quantity.ToString(), temp->product->Type);
+		gridView->Rows->Add(temp->employee->id.ToString(), temp->employee->Name, temp->employee->Sex, temp->employee->DateOfBirth, temp->employee->Phone, temp->employee->Password, temp->employee->RegisterDate, temp->employee->Position, temp->employee->WorkHour, temp->employee->Salary);
 
 		temp = temp->next;
 	}
 }
-
-void Linkedlist::SearchNode(DataGridView^ gridView, String^ item) {
+/*
+void Linkedlist_Admin::SearchNode(DataGridView^ gridView, String^ item) {
 	Node^ temp = head;
 	bool check = true;
 
@@ -188,7 +192,7 @@ void Linkedlist::SearchNode(DataGridView^ gridView, String^ item) {
 				gridView->Rows->Clear();
 			}
 			gridView->Rows->Add(temp->product->id.ToString(), temp->product->Name, temp->product->Price.ToString(), temp->product->Quantity.ToString(), temp->product->Type);
-			
+
 		}
 
 		temp = temp->next;
@@ -200,7 +204,7 @@ void Linkedlist::SearchNode(DataGridView^ gridView, String^ item) {
 
 }
 
-void Linkedlist::UpdateNode(Product^ prod) {
+void Linkedlist_Admin::UpdateNode(Product^ prod) {
 	Node^ current = head;
 	int check = 0;
 
@@ -228,7 +232,7 @@ void Linkedlist::UpdateNode(Product^ prod) {
 }
 
 
-void Linkedlist::SortNode(int option) {
+void Linkedlist_Admin::SortNode(int option) {
 	Node^ current = head;
 	Node^ index = nullptr;
 	Product^ temp;
@@ -300,5 +304,4 @@ void Linkedlist::SortNode(int option) {
 			MessageBox::Show("Completed Sorting List By ID", "Product", MessageBoxButtons::OK);
 		}
 	}
-}
-
+}*/

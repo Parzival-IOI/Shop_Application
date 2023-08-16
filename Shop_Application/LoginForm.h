@@ -207,17 +207,14 @@ namespace ShopApplication {
 				user = gcnew User;
 				user->id = reader->GetInt32(0);
 				user->Name = reader->GetString(1);
-				user->Age = reader->GetInt32(2);
-				user->Sex = reader->GetString(3);
-				user->DateOfBirth = reader->GetDateTime(4);
-				user->Address = reader->GetString(5);
-				user->Phone = reader->GetString(6);
-				user->Email = reader->GetString(7);
-				user->Password = reader->GetString(8);
-				user->RegisterDate = reader->GetDateTime(9);
-				user->Position = reader->GetString(10);
-				user->WorkHour = reader->GetString(11);
-				user->Salary = reader->GetString(12);
+				user->Sex = reader->GetString(2);
+				user->DateOfBirth = reader->GetDateTime(3);
+				user->Phone = reader->GetString(4);
+				user->Password = reader->GetString(5);
+				user->RegisterDate = reader->GetDateTime(6);
+				user->Position = reader->GetString(7);
+				user->WorkHour = reader->GetString(8);
+				user->Salary = reader->GetString(9);
 
 				this->Close();
 			}

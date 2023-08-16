@@ -33,13 +33,16 @@
     <ClInclude Include="_Product_.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LinkList.h">
+    <ClInclude Include="LinkedList_Product.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Management.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Manage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedList_Admin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
