@@ -7,10 +7,10 @@ public:
 	int id;
 	String^ Name;
 	String^ Sex;
-	DateTime DateOfBirth;
+	String^ DateOfBirth;
 	String^ Phone;
 	String^ Password;
-	DateTime RegisterDate;
+	String^ RegisterDate;
 	String^ Position;
 	String^ WorkHour;
 	String^ Salary;

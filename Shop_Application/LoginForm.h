@@ -208,10 +208,10 @@ namespace ShopApplication {
 				user->id = reader->GetInt32(0);
 				user->Name = reader->GetString(1);
 				user->Sex = reader->GetString(2);
-				user->DateOfBirth = reader->GetDateTime(3);
+				user->DateOfBirth = reader->GetString(3);
 				user->Phone = reader->GetString(4);
 				user->Password = reader->GetString(5);
-				user->RegisterDate = reader->GetDateTime(6);
+				user->RegisterDate = reader->GetString(6);
 				user->Position = reader->GetString(7);
 				user->WorkHour = reader->GetString(8);
 				user->Salary = reader->GetString(9);

@@ -1,5 +1,7 @@
 #pragma once
 
+
+
 using namespace System;
 using namespace System::ComponentModel;
 using namespace System::Collections;
@@ -266,7 +268,8 @@ void Linkedlist_Product::SortNode_Product(int option) {
 			while (current != nullptr) {
 				index = current->next;
 				while (index != nullptr) {
-					if (current->product->id < index->product->id) {
+					if ((String::Compare(current->product->Name, index->product->Name) > 0)) {
+						
 						temp = current->product;
 						current->product = index->product;
 						index->product = temp;
@@ -288,7 +291,7 @@ void Linkedlist_Product::SortNode_Product(int option) {
 			while (current != nullptr) {
 				index = current->next;
 				while (index != nullptr) {
-					if (current->product->id > index->product->id) {
+					if ((String::Compare(current->product->Type, index->product->Type) > 0)) {
 						temp = current->product;
 						current->product = index->product;
 						index->product = temp;

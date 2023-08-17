@@ -13,29 +13,29 @@ public ref class Employee {
 		int id;
 		String^ Name;
 		String^ Sex;
-		DateTime DateOfBirth;
+		String^ DateOfBirth;
 		String^ Phone;
 		String^ Password;
-		DateTime RegisterDate;
+		String^ RegisterDate;
 		String^ Position;
 		String^ WorkHour;
 		String^ Salary;
 };
 
-public ref class Node {
+public ref class Node_Admin {
 public:
 	Employee^ employee;
-	Node^ next;
+	Node_Admin^ next;
 
 	// Default constructor
-	Node()
+	Node_Admin()
 	{
 		employee = nullptr;
 		next = nullptr;
 	}
 
 	// Parameterised Constructor
-	Node(Employee^ emp)
+	Node_Admin(Employee^ emp)
 	{
 		this->employee = emp;
 		this->next = nullptr;
@@ -45,46 +45,46 @@ public:
 // Linked list class to
 // implement a linked list.
 public ref class Linkedlist_Admin {
-	Node^ head;
+	Node_Admin^ head;
 
 public:
 	// Default constructor
 	Linkedlist_Admin() { head = nullptr; }
 
 	// Function to insert a
-	// node at the end of the
+	// Node_Admin at the end of the
 	// linked list.
-	void insertNode(Employee^ emp);
+	void insertNode_Admin(Employee^ emp);
 
 	// Function to print the
 	// linked list.
 	void printList(DataGridView^ gridView);
 
 	// Function to delete the
-	// node at given position
-	void deleteNode(Employee^ emp);
+	// Node_Admin at given position
+	void deleteNode_Admin(Employee^ emp);
 
-	// Fuction to search Node
+	// Fuction to search Node_Admin
 	// Parameter(data-grid-view, String^ Item)
-	//void SearchNode(DataGridView^ gridView, String^ item);
+	void SearchNode_Admin(DataGridView^ gridView, String^ item);
 
-	// Function Update Node
+	// Function Update Node_Admin
 	// Parameter(data-grid-view, Product^ item_Update)
-	//void UpdateNode(Employee^ emp);
+	void UpdateNode_Admin(Employee^ emp);
 
-	//Function Sort Node
+	//Function Sort Node_Admin
 	// Parameter Option( 1 = ID | 2 = Name | 3 = Type )
-	//void SortNode(int option);
+	//void SortNode_Admin(int option);
 };
 
-void Linkedlist_Admin::deleteNode(Employee^ emp)
+void Linkedlist_Admin::deleteNode_Admin(Employee^ emp)
 {
-	Node^ temp1 = head;
-	Node^ temp2;
+	Node_Admin^ temp1 = head;
+	Node_Admin^ temp2;
 	int check = 0;
 
 	if (head == nullptr) {
-		MessageBox::Show(L"Product is Empty", L"Product", MessageBoxButtons::OK);
+		MessageBox::Show(L"Employee is Empty", L"Employee", MessageBoxButtons::OK);
 		return;
 	}
 
@@ -94,7 +94,7 @@ void Linkedlist_Admin::deleteNode(Employee^ emp)
 	// Deleting the head.
 	if (temp1->employee->id == emp->id) {
 
-		MessageBox::Show("Product Deleted At " + temp1->employee->id, "Product", MessageBoxButtons::OK);
+		MessageBox::Show("Employee Deleted At " + temp1->employee->id, "Employee", MessageBoxButtons::OK);
 		// Update head
 		head = head->next;
 		delete temp1;
@@ -112,7 +112,7 @@ void Linkedlist_Admin::deleteNode(Employee^ emp)
 			}
 			check++;
 
-			MessageBox::Show("Product Deleted At " + temp1->employee->id, "Product", MessageBoxButtons::OK);
+			MessageBox::Show("Employee Deleted At " + temp1->employee->id, "Employee", MessageBoxButtons::OK);
 
 			delete temp1;
 			break;
@@ -124,26 +124,26 @@ void Linkedlist_Admin::deleteNode(Employee^ emp)
 	}
 
 	if (check == 0) {
-		MessageBox::Show("Can't Find Product ID " + emp->id, "Product", MessageBoxButtons::OK);
+		MessageBox::Show("Can't Find Employee ID " + emp->id, "Employee", MessageBoxButtons::OK);
 	}
 
 
 }
 
-// Function to insert a new node.
-void Linkedlist_Admin::insertNode(Employee^ emp)
+// Function to insert a new Node_Admin.
+void Linkedlist_Admin::insertNode_Admin(Employee^ emp)
 {
-	// Create the new Node.
-	Node^ newNode = gcnew Node(emp);
+	// Create the new Node_Admin.
+	Node_Admin^ newNode_Admin = gcnew Node_Admin(emp);
 
 	// Assign to head
 	if (head == nullptr) {
-		head = newNode;
+		head = newNode_Admin;
 		return;
 	}
 
 	// Traverse till end of list
-	Node^ temp = head;
+	Node_Admin^ temp = head;
 	while (temp->next != nullptr) {
 
 		// Update temp
@@ -151,18 +151,18 @@ void Linkedlist_Admin::insertNode(Employee^ emp)
 	}
 
 	// Insert at the last.
-	temp->next = newNode;
+	temp->next = newNode_Admin;
 }
 
 // Function to print the
-// nodes of the linked list.
+// Node_Admins of the linked list.
 void Linkedlist_Admin::printList(DataGridView^ gridView)
 {
-	Node^ temp = head;
+	Node_Admin^ temp = head;
 
 	// Check for empty list.
 	if (head == nullptr) {
-		MessageBox::Show("Product is Empty", "Product", MessageBoxButtons::OK);
+		MessageBox::Show("Employee is Empty", "Employee", MessageBoxButtons::OK);
 		return;
 	}
 	gridView->Rows->Clear();
@@ -174,24 +174,24 @@ void Linkedlist_Admin::printList(DataGridView^ gridView)
 		temp = temp->next;
 	}
 }
-/*
-void Linkedlist_Admin::SearchNode(DataGridView^ gridView, String^ item) {
-	Node^ temp = head;
+
+void Linkedlist_Admin::SearchNode_Admin(DataGridView^ gridView, String^ item) {
+	Node_Admin^ temp = head;
 	bool check = true;
 
 	if (head == nullptr) {
-		MessageBox::Show("Product is Empty", "Product", MessageBoxButtons::OK);
+		MessageBox::Show("Employee is Empty", "Employee", MessageBoxButtons::OK);
 		return;
 	}
 
 	while (temp != nullptr) {
 
-		if (temp->product->id.ToString() == item || temp->product->Name == item || temp->product->Type == item) {
+		if (temp->employee->id.ToString() == item || temp->employee->Name == item || temp->employee->Position == item) {
 			if (check) {
 				check = false;
 				gridView->Rows->Clear();
 			}
-			gridView->Rows->Add(temp->product->id.ToString(), temp->product->Name, temp->product->Price.ToString(), temp->product->Quantity.ToString(), temp->product->Type);
+			gridView->Rows->Add(temp->employee->id.ToString(), temp->employee->Name, temp->employee->Sex, temp->employee->DateOfBirth, temp->employee->Phone, temp->employee->Password, temp->employee->RegisterDate, temp->employee->Position, temp->employee->WorkHour, temp->employee->Salary);
 
 		}
 
@@ -199,25 +199,25 @@ void Linkedlist_Admin::SearchNode(DataGridView^ gridView, String^ item) {
 	}
 
 	if (check) {
-		MessageBox::Show("Cannot Find Product " + item, "Product", MessageBoxButtons::OK);
+		MessageBox::Show("Cannot Find Employee " + item, "Employee", MessageBoxButtons::OK);
 	}
 
 }
 
-void Linkedlist_Admin::UpdateNode(Product^ prod) {
-	Node^ current = head;
+void Linkedlist_Admin::UpdateNode_Admin(Employee^ emp) {
+	Node_Admin^ current = head;
 	int check = 0;
 
 	if (head == nullptr) {
-		MessageBox::Show("Product is Empty", "Product", MessageBoxButtons::OK);
+		MessageBox::Show("Employee is Empty", "Employee", MessageBoxButtons::OK);
 		return;
 	}
 
 	while (current->next != nullptr) {
-		if (current->product->id == prod->id) {
-			current->product = prod;
+		if (current->employee->id == emp->id) {
+			current->employee = emp;
 
-			MessageBox::Show("Updated Product With Product ID = " + prod->id, "Product", MessageBoxButtons::OK);
+			MessageBox::Show("Updated Employee With Employee ID = " + emp->id, "Employee", MessageBoxButtons::OK);
 
 			return;
 		}
@@ -226,15 +226,15 @@ void Linkedlist_Admin::UpdateNode(Product^ prod) {
 		check++;
 	}
 	if (check == 0) {
-		MessageBox::Show("Cannot Find Product ID " + prod->id, "Product", MessageBoxButtons::OK);
+		MessageBox::Show("Cannot Find Employee ID " + emp->id, "Employee", MessageBoxButtons::OK);
 	}
 
 }
 
-
-void Linkedlist_Admin::SortNode(int option) {
-	Node^ current = head;
-	Node^ index = nullptr;
+/*
+void Linkedlist_Admin::SortNode_Admin(int option) {
+	Node_Admin^ current = head;
+	Node_Admin^ index = nullptr;
 	Product^ temp;
 
 	if (option == 1) {
