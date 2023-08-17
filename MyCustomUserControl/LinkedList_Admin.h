@@ -74,7 +74,7 @@ public:
 
 	//Function Sort Node_Admin
 	// Parameter Option( 1 = ID | 2 = Name | 3 = Type )
-	//void SortNode_Admin(int option);
+	void SortNode_Admin(int option);
 };
 
 void Linkedlist_Admin::deleteNode_Admin(Employee^ emp)
@@ -231,77 +231,99 @@ void Linkedlist_Admin::UpdateNode_Admin(Employee^ emp) {
 
 }
 
-/*
+
 void Linkedlist_Admin::SortNode_Admin(int option) {
 	Node_Admin^ current = head;
 	Node_Admin^ index = nullptr;
-	Product^ temp;
+	Employee^ temp;
 
 	if (option == 1) {
 
 		if (head == nullptr) {
-			MessageBox::Show("Product is Empty", "Product", MessageBoxButtons::OK);
+			MessageBox::Show("Employee is Empty", "Employee", MessageBoxButtons::OK);
 			return;
 		}
 		else {
 			while (current != nullptr) {
 				index = current->next;
 				while (index != nullptr) {
-					if (current->product->id > index->product->id) {
-						temp = current->product;
-						current->product = index->product;
-						index->product = temp;
+					if (current->employee->id > index->employee->id) {
+						temp = current->employee;
+						current->employee = index->employee;
+						index->employee = temp;
 					}
 					index = index->next;
 				}
 				current = current->next;
 			}
-			MessageBox::Show("Completed Sorting List By ID", "Product", MessageBoxButtons::OK);
+			MessageBox::Show("Completed Sorting List By ID", "Employee", MessageBoxButtons::OK);
 		}
 
 	}
 	else if (option == 2) {
 
 		if (head == nullptr) {
-			MessageBox::Show("Product is Empty", "Product", MessageBoxButtons::OK);
+			MessageBox::Show("Employee is Empty", "Employee", MessageBoxButtons::OK);
 			return;
 		}
 		else {
 			while (current != nullptr) {
 				index = current->next;
 				while (index != nullptr) {
-					if (current->product->id < index->product->id) {
-						temp = current->product;
-						current->product = index->product;
-						index->product = temp;
+					if ((String::Compare(current->employee->Name, index->employee->Name) > 0)) {
+						temp = current->employee;
+						current->employee = index->employee;
+						index->employee = temp;
 					}
 					index = index->next;
 				}
 				current = current->next;
 			}
-			MessageBox::Show("Completed Sorting List By ID", "Product", MessageBoxButtons::OK);
+			MessageBox::Show("Completed Sorting List By Name", "Employee", MessageBoxButtons::OK);
 		}
 	}
 	else if (option == 3) {
 
 		if (head == nullptr) {
-			MessageBox::Show("Product is Empty", "Product", MessageBoxButtons::OK);
+			MessageBox::Show("Employee is Empty", "Employee", MessageBoxButtons::OK);
 			return;
 		}
 		else {
 			while (current != nullptr) {
 				index = current->next;
 				while (index != nullptr) {
-					if (current->product->id > index->product->id) {
-						temp = current->product;
-						current->product = index->product;
-						index->product = temp;
+					if ((String::Compare(current->employee->Sex, index->employee->Sex) > 0)) {
+						temp = current->employee;
+						current->employee = index->employee;
+						index->employee = temp;
 					}
 					index = index->next;
 				}
 				current = current->next;
 			}
-			MessageBox::Show("Completed Sorting List By ID", "Product", MessageBoxButtons::OK);
+			MessageBox::Show("Completed Sorting List By Sex", "Employee", MessageBoxButtons::OK);
 		}
 	}
-}*/
+	else if (option == 4) {
+
+		if (head == nullptr) {
+			MessageBox::Show("Employee is Empty", "Employee", MessageBoxButtons::OK);
+			return;
+		}
+		else {
+			while (current != nullptr) {
+				index = current->next;
+				while (index != nullptr) {
+					if ((String::Compare(current->employee->Position, index->employee->Position) > 0)) {
+						temp = current->employee;
+						current->employee = index->employee;
+						index->employee = temp;
+					}
+					index = index->next;
+				}
+				current = current->next;
+			}
+			MessageBox::Show("Completed Sorting List By Position", "Employee", MessageBoxButtons::OK);
+		}
+	}
+}

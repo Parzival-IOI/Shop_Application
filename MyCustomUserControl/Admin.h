@@ -193,7 +193,7 @@ private: System::Windows::Forms::ComboBox^ comboBoxSex;
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle3 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
 			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -251,15 +251,15 @@ private: System::Windows::Forms::ComboBox^ comboBoxSex;
 				this->Column1,
 					this->Column2, this->Column4, this->Column5, this->Column7, this->Column9, this->Column10, this->Column11, this->Column12, this->Column13
 			});
-			dataGridViewCellStyle2->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			dataGridViewCellStyle2->BackColor = System::Drawing::Color::WhiteSmoke;
-			dataGridViewCellStyle2->Font = (gcnew System::Drawing::Font(L"Consolas", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle3->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			dataGridViewCellStyle3->BackColor = System::Drawing::Color::WhiteSmoke;
+			dataGridViewCellStyle3->Font = (gcnew System::Drawing::Font(L"Consolas", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			dataGridViewCellStyle2->ForeColor = System::Drawing::Color::Black;
-			dataGridViewCellStyle2->SelectionBackColor = System::Drawing::Color::Gray;
-			dataGridViewCellStyle2->SelectionForeColor = System::Drawing::Color::White;
-			dataGridViewCellStyle2->WrapMode = System::Windows::Forms::DataGridViewTriState::False;
-			this->dataGridView1->DefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle3->ForeColor = System::Drawing::Color::Black;
+			dataGridViewCellStyle3->SelectionBackColor = System::Drawing::Color::Gray;
+			dataGridViewCellStyle3->SelectionForeColor = System::Drawing::Color::White;
+			dataGridViewCellStyle3->WrapMode = System::Windows::Forms::DataGridViewTriState::False;
+			this->dataGridView1->DefaultCellStyle = dataGridViewCellStyle3;
 			this->dataGridView1->Dock = System::Windows::Forms::DockStyle::Bottom;
 			this->dataGridView1->Location = System::Drawing::Point(0, 382);
 			this->dataGridView1->Name = L"dataGridView1";
@@ -665,6 +665,7 @@ private: System::Windows::Forms::ComboBox^ comboBoxSex;
 			this->Sort_Admin->TabIndex = 7;
 			this->Sort_Admin->Text = L"Sort";
 			this->Sort_Admin->UseVisualStyleBackColor = true;
+			this->Sort_Admin->Click += gcnew System::EventHandler(this, &Admin::Sort_Admin_Click);
 			// 
 			// Admin
 			// 
@@ -955,6 +956,25 @@ private: System::Windows::Forms::ComboBox^ comboBoxSex;
 			}
 		}
 		delete emp;
+	}
+	private: System::Void Sort_Admin_Click(System::Object^ sender, System::EventArgs^ e) {
+		String^ item = this->comboBoxSort->SelectedItem->ToString();
+		if (item == "ID") {
+			list.SortNode_Admin(1);
+		}
+		else if (item == "Name") {
+			list.SortNode_Admin(2);
+		}
+		else if (item == "Sex") {
+			list.SortNode_Admin(3);
+		}
+		else if (item == "Position") {
+			list.SortNode_Admin(4);
+		}
+		else {
+			MessageBox::Show("Can't Get Value From Combobox", "Error", MessageBoxButtons::OK);
+		}
+		list.printList(dataGridView1);
 	}
 };
 }

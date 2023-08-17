@@ -738,7 +738,7 @@ namespace MyCustomUserControl {
 			list.SortNode_Product(3);
 		}
 		else {
-			MessageBox::Show("Can't Get Value From Combobox", "Database Error !", MessageBoxButtons::OK);
+			MessageBox::Show("Can't Get Value From Combobox", "Error", MessageBoxButtons::OK);
 		}
 		list.printList(dataGridView2);
 	}

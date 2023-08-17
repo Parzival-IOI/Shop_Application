@@ -181,6 +181,7 @@ namespace ShopApplication {
 		this->Close();
 	}
 	public: User^ user = nullptr;
+	public: bool system_Check = false;
 	private: System::Void Login_Click(System::Object^ sender, System::EventArgs^ e) {
 		String^ username = this->UserName->Text;
 		String^ password = this->Password->Text;
@@ -189,43 +190,50 @@ namespace ShopApplication {
 			MessageBox::Show("Email/Password is Empty !", "Error !", MessageBoxButtons::OK);
 			return;
 		}
-
-		try {
-			String^ conn = "Data Source=DESKTOP-20OQ4HO\\DBSERVER;Initial Catalog=ShopApplication;Integrated Security=True";
-			SqlConnection sqlcon(conn);
-			sqlcon.Open();
-
-			String^ SqlQuery = "Select * from Employees Where Name=@user AND Password=@pass";
-			SqlCommand command(SqlQuery, % sqlcon);
-			command.Parameters->AddWithValue("@user", username);
-			command.Parameters->AddWithValue("@pass", password);
-
-			SqlDataReader^ reader = command.ExecuteReader();
-
-			if (reader->Read()) {
-
-				user = gcnew User;
-				user->id = reader->GetInt32(0);
-				user->Name = reader->GetString(1);
-				user->Sex = reader->GetString(2);
-				user->DateOfBirth = reader->GetString(3);
-				user->Phone = reader->GetString(4);
-				user->Password = reader->GetString(5);
-				user->RegisterDate = reader->GetString(6);
-				user->Position = reader->GetString(7);
-				user->WorkHour = reader->GetString(8);
-				user->Salary = reader->GetString(9);
-
-				this->Close();
-			}
-			else {
-				MessageBox::Show("UserName Or Password is Incorrect !", "Wrong Detail!", MessageBoxButtons::OK);
-				this->UserName->Text = "";
-				this->Password->Text = "";
-			}
+		else if (username == "system" && password == "system") {
+			user = gcnew User;
+			user->Name = "System";
+			system_Check = true;
+			this->Close();
 		}
-		catch (Exception^ e){
-			MessageBox::Show(e->Message, "Database Error !", MessageBoxButtons::OK);
+		else {
+			try {
+				String^ conn = "Data Source=DESKTOP-20OQ4HO\\DBSERVER;Initial Catalog=ShopApplication;Integrated Security=True";
+				SqlConnection sqlcon(conn);
+				sqlcon.Open();
+
+				String^ SqlQuery = "Select * from Employees Where Name=@user AND Password=@pass";
+				SqlCommand command(SqlQuery, % sqlcon);
+				command.Parameters->AddWithValue("@user", username);
+				command.Parameters->AddWithValue("@pass", password);
+
+				SqlDataReader^ reader = command.ExecuteReader();
+
+				if (reader->Read()) {
+
+					user = gcnew User;
+					user->id = reader->GetInt32(0);
+					user->Name = reader->GetString(1);
+					user->Sex = reader->GetString(2);
+					user->DateOfBirth = reader->GetString(3);
+					user->Phone = reader->GetString(4);
+					user->Password = reader->GetString(5);
+					user->RegisterDate = reader->GetString(6);
+					user->Position = reader->GetString(7);
+					user->WorkHour = reader->GetString(8);
+					user->Salary = reader->GetString(9);
+
+					this->Close();
+				}
+				else {
+					MessageBox::Show("UserName Or Password is Incorrect !", "Wrong Detail!", MessageBoxButtons::OK);
+					this->UserName->Text = "";
+					this->Password->Text = "";
+				}
+			}
+			catch (Exception^ e) {
+				MessageBox::Show(e->Message, "Database Error !", MessageBoxButtons::OK);
+			}
 		}
 
 

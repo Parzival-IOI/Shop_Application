@@ -13,10 +13,11 @@ int main(array<String^>^ args) {
 	
 	loginform.ShowDialog();
 	User^ user = loginform.user;
+	bool system_Check = loginform.system_Check;
 
 	if (user != nullptr) {
 		//MessageBox::Show("Login Success", "Program.cpp", MessageBoxButtons::OK);
-		ShopApplication::MainForm mainform(user);
+		ShopApplication::MainForm mainform(user, system_Check);
 		Application::Run(% mainform);
 	}
 

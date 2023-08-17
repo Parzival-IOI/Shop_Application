@@ -18,14 +18,33 @@ namespace ShopApplication {
 	public ref class MainForm : public System::Windows::Forms::Form
 	{
 	public:
-		MainForm(User ^user)
+		MainForm(User ^user, bool System_Check)
 		{
 			InitializeComponent();
-			employee1->BringToFront();
 			//
 			//TODO: Add the constructor code here
 			//
-			label1->Text = user->Name;
+
+			this->label1->Text = user->Name;
+
+			employee1->BringToFront();
+
+			this->Control_Admin->Enabled = false;
+			this->Conrol_Management->Enabled = false;
+
+			if (System_Check) {
+				this->Control_Employee->Enabled = false;
+				this->Control_Admin->Enabled = true;
+				this->Conrol_Management->Enabled = true;
+				this->admin1->BringToFront();
+				this->panel3->Location = this->Control_Admin->Location;
+			}
+
+			if (user->Position == "Admin") {
+				this->Control_Admin->Enabled = true;
+				this->Conrol_Management->Enabled = true;
+			}
+
 		}
 
 	protected:
@@ -40,13 +59,16 @@ namespace ShopApplication {
 			}
 		}
 	private: System::Windows::Forms::Panel^ panel1;
-	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Button^ Control_Employee;
+
 
 
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Panel^ panel2;
-	private: System::Windows::Forms::Button^ button3;
-	private: System::Windows::Forms::Button^ button2;
+	private: System::Windows::Forms::Button^ Conrol_Management;
+
+	private: System::Windows::Forms::Button^ Control_Admin;
+
 	private: System::Windows::Forms::Panel^ panel3;
 	private: System::Windows::Forms::Panel^ panel4;
 	private: MyCustomUserControl::Employee^ employee1;
@@ -89,10 +111,10 @@ namespace ShopApplication {
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->panel4 = (gcnew System::Windows::Forms::Panel());
 			this->panel3 = (gcnew System::Windows::Forms::Panel());
-			this->button3 = (gcnew System::Windows::Forms::Button());
-			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->Conrol_Management = (gcnew System::Windows::Forms::Button());
+			this->Control_Admin = (gcnew System::Windows::Forms::Button());
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->Control_Employee = (gcnew System::Windows::Forms::Button());
 			this->panel2 = (gcnew System::Windows::Forms::Panel());
 			this->employee1 = (gcnew MyCustomUserControl::Employee());
 			this->admin1 = (gcnew MyCustomUserControl::Admin());
@@ -105,10 +127,10 @@ namespace ShopApplication {
 			this->panel1->BackColor = System::Drawing::Color::SlateGray;
 			this->panel1->Controls->Add(this->panel4);
 			this->panel1->Controls->Add(this->panel3);
-			this->panel1->Controls->Add(this->button3);
-			this->panel1->Controls->Add(this->button2);
+			this->panel1->Controls->Add(this->Conrol_Management);
+			this->panel1->Controls->Add(this->Control_Admin);
 			this->panel1->Controls->Add(this->label1);
-			this->panel1->Controls->Add(this->button1);
+			this->panel1->Controls->Add(this->Control_Employee);
 			this->panel1->Dock = System::Windows::Forms::DockStyle::Left;
 			this->panel1->Location = System::Drawing::Point(0, 0);
 			this->panel1->Name = L"panel1";
@@ -131,35 +153,35 @@ namespace ShopApplication {
 			this->panel3->Size = System::Drawing::Size(10, 60);
 			this->panel3->TabIndex = 2;
 			// 
-			// button3
+			// Conrol_Management
 			// 
-			this->button3->FlatAppearance->BorderSize = 0;
-			this->button3->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button3->Font = (gcnew System::Drawing::Font(L"Consolas", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->Conrol_Management->FlatAppearance->BorderSize = 0;
+			this->Conrol_Management->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->Conrol_Management->Font = (gcnew System::Drawing::Font(L"Consolas", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button3->ForeColor = System::Drawing::Color::WhiteSmoke;
-			this->button3->Location = System::Drawing::Point(0, 222);
-			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(172, 60);
-			this->button3->TabIndex = 3;
-			this->button3->Text = L"Management";
-			this->button3->UseVisualStyleBackColor = true;
-			this->button3->Click += gcnew System::EventHandler(this, &MainForm::button3_Click);
+			this->Conrol_Management->ForeColor = System::Drawing::Color::WhiteSmoke;
+			this->Conrol_Management->Location = System::Drawing::Point(0, 222);
+			this->Conrol_Management->Name = L"Conrol_Management";
+			this->Conrol_Management->Size = System::Drawing::Size(172, 60);
+			this->Conrol_Management->TabIndex = 3;
+			this->Conrol_Management->Text = L"Management";
+			this->Conrol_Management->UseVisualStyleBackColor = true;
+			this->Conrol_Management->Click += gcnew System::EventHandler(this, &MainForm::button3_Click);
 			// 
-			// button2
+			// Control_Admin
 			// 
-			this->button2->FlatAppearance->BorderSize = 0;
-			this->button2->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button2->Font = (gcnew System::Drawing::Font(L"Consolas", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->Control_Admin->FlatAppearance->BorderSize = 0;
+			this->Control_Admin->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->Control_Admin->Font = (gcnew System::Drawing::Font(L"Consolas", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button2->ForeColor = System::Drawing::Color::WhiteSmoke;
-			this->button2->Location = System::Drawing::Point(0, 156);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(172, 60);
-			this->button2->TabIndex = 2;
-			this->button2->Text = L"Admin";
-			this->button2->UseVisualStyleBackColor = true;
-			this->button2->Click += gcnew System::EventHandler(this, &MainForm::button2_Click);
+			this->Control_Admin->ForeColor = System::Drawing::Color::WhiteSmoke;
+			this->Control_Admin->Location = System::Drawing::Point(0, 156);
+			this->Control_Admin->Name = L"Control_Admin";
+			this->Control_Admin->Size = System::Drawing::Size(172, 60);
+			this->Control_Admin->TabIndex = 2;
+			this->Control_Admin->Text = L"Admin";
+			this->Control_Admin->UseVisualStyleBackColor = true;
+			this->Control_Admin->Click += gcnew System::EventHandler(this, &MainForm::button2_Click);
 			// 
 			// label1
 			// 
@@ -174,20 +196,20 @@ namespace ShopApplication {
 			this->label1->TabIndex = 1;
 			this->label1->Text = L"Unknown";
 			// 
-			// button1
+			// Control_Employee
 			// 
-			this->button1->FlatAppearance->BorderSize = 0;
-			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button1->Font = (gcnew System::Drawing::Font(L"Consolas", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->Control_Employee->FlatAppearance->BorderSize = 0;
+			this->Control_Employee->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->Control_Employee->Font = (gcnew System::Drawing::Font(L"Consolas", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button1->ForeColor = System::Drawing::Color::WhiteSmoke;
-			this->button1->Location = System::Drawing::Point(0, 90);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(172, 60);
-			this->button1->TabIndex = 1;
-			this->button1->Text = L"Employee";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &MainForm::button1_Click);
+			this->Control_Employee->ForeColor = System::Drawing::Color::WhiteSmoke;
+			this->Control_Employee->Location = System::Drawing::Point(0, 90);
+			this->Control_Employee->Name = L"Control_Employee";
+			this->Control_Employee->Size = System::Drawing::Size(172, 60);
+			this->Control_Employee->TabIndex = 1;
+			this->Control_Employee->Text = L"Employee";
+			this->Control_Employee->UseVisualStyleBackColor = true;
+			this->Control_Employee->Click += gcnew System::EventHandler(this, &MainForm::button1_Click);
 			// 
 			// panel2
 			// 
@@ -250,15 +272,15 @@ namespace ShopApplication {
 
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->employee1->BringToFront();
-		this->panel3->Location = this->button1->Location;
+		this->panel3->Location = this->Control_Employee->Location;
 	}
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-		this->admin1->BringToFront();;
-		this->panel3->Location = this->button2->Location;
+		this->admin1->BringToFront();
+		this->panel3->Location = this->Control_Admin->Location;
 	}
 	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->manage1->BringToFront();
-		this->panel3->Location = this->button3->Location;
+		this->panel3->Location = this->Conrol_Management->Location;
 	}
 };
 }
