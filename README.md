@@ -1,4 +1,4 @@
-# Shop_Application
+# Shop_Application :heart_on_fire: :squid:
 
 - Second Semester `Royal University of Phnom Penh` `Second Year`
 - Linked List Project `Shop Application`
