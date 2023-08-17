@@ -4,7 +4,7 @@
 - Linked List Project `Shop Application`
 - Visual C++ `.Net Framework`
 
-View My ** [Portfolio](https://parzival-ioi.vercel.app/) **
+View My **[Portfolio](https://parzival-ioi.vercel.app/)**
 
 ### Linked List Implementation
 
