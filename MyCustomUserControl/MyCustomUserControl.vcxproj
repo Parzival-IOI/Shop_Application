@@ -127,6 +127,7 @@
       <FileType>CppControl</FileType>
     </ClInclude>
     <ClInclude Include="LinkedList_Admin.h" />
+    <ClInclude Include="LinkedList_Employee.h" />
     <ClInclude Include="LinkedList_Product.h" />
     <ClInclude Include="Manage.h">
       <FileType>CppControl</FileType>

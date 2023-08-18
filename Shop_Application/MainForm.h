@@ -71,9 +71,9 @@ namespace ShopApplication {
 
 	private: System::Windows::Forms::Panel^ panel3;
 	private: System::Windows::Forms::Panel^ panel4;
-	private: MyCustomUserControl::Employee^ employee1;
-	private: MyCustomUserControl::Admin^ admin1;
 	private: MyCustomUserControl::Manage^ manage1;
+	private: MyCustomUserControl::Admin^ admin1;
+	private: MyCustomUserControl::Employee^ employee1;
 
 
 

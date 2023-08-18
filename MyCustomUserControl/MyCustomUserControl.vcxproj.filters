@@ -45,6 +45,9 @@
     <ClInclude Include="LinkedList_Admin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="LinkedList_Employee.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MyCustomUserControl.cpp">

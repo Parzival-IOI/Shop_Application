@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Linklist.h"
+#include "Linkedlist_Product.h"
 
 using namespace System;
 using namespace System::ComponentModel;
@@ -44,7 +44,7 @@ namespace MyCustomUserControl {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column3;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column4;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
-	public: Linkedlist list;
+	public: Linkedlist_Product list;
 	private: Product^ product;
 
 	private:
