@@ -18,7 +18,7 @@ namespace ShopApplication {
 	public ref class MainForm : public System::Windows::Forms::Form
 	{
 	public:
-		MainForm(User ^user, bool System_Check)
+		MainForm(User^ user, bool System_Check)
 		{
 			InitializeComponent();
 			//
@@ -44,7 +44,8 @@ namespace ShopApplication {
 				this->Control_Admin->Enabled = true;
 				this->Conrol_Management->Enabled = true;
 			}
-
+			this->user = user;
+			employee1->setUser(user->id, user->Name);
 		}
 
 	protected:
@@ -60,7 +61,7 @@ namespace ShopApplication {
 		}
 	private: System::Windows::Forms::Panel^ panel1;
 	private: System::Windows::Forms::Button^ Control_Employee;
-
+	private: User^ user;
 
 
 	private: System::Windows::Forms::Label^ label1;
@@ -74,6 +75,7 @@ namespace ShopApplication {
 	private: MyCustomUserControl::Manage^ manage1;
 	private: MyCustomUserControl::Admin^ admin1;
 	private: MyCustomUserControl::Employee^ employee1;
+			
 
 
 
